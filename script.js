@@ -30,7 +30,7 @@ const createUIElement = () => {
 
 }
 
-document.querySelector("#btnNext").addEventListener("click", function () {
+let textSlider = () => {
     if (activeIndex+1 < items.length) {
         activeIndex++;
     }
@@ -38,9 +38,9 @@ document.querySelector("#btnNext").addEventListener("click", function () {
         activeIndex = 0;
     }
     createUIElement()
- 
 
-})
+}
+document.querySelector("#btnNext").addEventListener("click", textSlider )
 
 document.querySelector("#btnPrev").addEventListener("click", function ()  {
      if(activeIndex > 0) {
@@ -52,7 +52,19 @@ document.querySelector("#btnPrev").addEventListener("click", function ()  {
      createUIElement()
 
 });
+let silderInterval = setInterval(() => {
+    textSlider()
+}, 1000)
 
+document.querySelector("#slider-Content").addEventListener("mouseenter", function () {
+    clearInterval(silderInterval)
+})
 
+document.querySelector("#slider-Content").addEventListener("mouseleave", function () {
+    silderInterval = setInterval(() => {
+        textSlider()
+    }, 1000)
+    
+})
 
 createUIElement()
